@@ -23,6 +23,7 @@ if ! cp -r "$dotfiles_dir"/* "$config_dir"; then
 fi
 echo "Dotfile directories copied successfully."
 
+# Create symlinks between Git and .config files
 echo "Creating symbolic links for individual files in the dotfile directories..."
 find "$dotfiles_dir" -type f -exec sh -c '
   target_path="$config_dir/$(dirname "{}")"
