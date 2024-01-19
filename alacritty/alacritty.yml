@@ -1,6 +1,5 @@
 env:
   TERM: alacritty
-
 window:
   padding:
     x: 8

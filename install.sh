@@ -1,64 +1,132 @@
 #!/bin/bash
 
-# set dotfile location
-dotfiles=~/git/dotfiles
+# Set dotfile and config dir locations
+dotfiles_dir="$HOME/git/dotfiles"
+config_dir="$HOME/.config"
 
-# Copy dotfile directories
-cp $dotfiles/* ~/.config/
+# Function to log errors
+log_error() {
+  echo "Error: $1" >&2
+}
 
-# Make symbolic links for .config files
-ln -sf $dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-ln -sf $dotfiles/awesome/rc.lua ~/.config/awesome/rc.lua
-ln -sf $dotfiles/awesome/theme.lua ~/.config/awesome/theme.lua
-ln -sf $dotfiles/bash/.bashrc ~/.bashrc
-ln -sf $dotfiles/bash/.bash_aliases ~/.config/bash/.bash_aliases
-ln -sf $dotfiles/micro/settings.json ~/.config/micro/settings.json
-ln -sf $dotfiles/micro/bindings.json ~/.config/micro/bindings.json
-ln -sf $dotfiles/newsboat/config ~/.config/newsboat/config
-ln -sf $dotfiles/newsboat/urls ~/.config/newsboat/urls
-ln -sf $dotfiles/ranger/rifle.conf ~/.config/ranger/rifle.conf
-ln -sf $dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
-ln -sf $dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-ln -sf $dotfiles/tmux/tmux.conf ~/.config/tmux/tmux.conf
+# Check if dotfiles directory exists
+if [ ! -d "$dotfiles_dir" ]; then
+  log_error "Dotfiles directory '$dotfiles_dir' not found."
+  exit 1
+fi
 
-# Install apt packages
-sudo apt install git alacritty awesome zsh tmux micro lynx neovim ranger flatpak newsboat thunderbird libreoffice picom yt-dlp vlc texlive flatpak flameshot gimp scribus inkscape xbacklight
+echo "Copying dotfile directories to ~/.config/..."
+# This is intentionally not recursive since we'll clone some stuff later
+if ! cp -r "$dotfiles_dir"/* "$config_dir"; then
+  log_error "Failed to copy dotfiles to '$config_dir'."
+  exit 1
+fi
+echo "Dotfile directories copied successfully."
 
-# Install dependencies for i3lock-color app
-sudo apt install autoconf gcc make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev
+echo "Creating symbolic links for individual files in the dotfile directories..."
+find "$dotfiles_dir" -type f -exec sh -c '
+  target_path="$config_dir/$(dirname "{}")"
+  mkdir -p "$target_path"
+  ln -sf "$dotfiles_dir/{}" "$target_path/$(basename "{}")"
+' \;
+echo "Symbolic links created successfully."
+
+# Apt package array
+apt_packages=(
+  alacritty
+  awesome
+  flatpak
+  flameshot
+  git
+  gimp
+  inkscape
+  libreoffice
+  lynx
+  micro
+  neovim
+  newsboat
+  picom
+  ranger
+  scribus
+  texlive
+  thunderbird
+  tmux
+  vlc
+  xbacklight
+  yt-dlp
+  zsh
+)
+
+echo "Installing Apt packages..."
+install_apt_packages() {
+  for package in "${apt_packages[@]}"; do
+    echo "Installing $package..."
+    if ! sudo apt-get install -y "$package"; then
+      log_error "Failed to install $package."
+      exit 1
+    else
+      echo "$package installed successfully."
+    fi
+  done
+}
+
+# Check if sudo privileges are available
+if [ "$EUID" -ne 0 ]; then
+  log_error "Please run with sudo or as root."
+  exit 1
+fi
+
+# Update Apt package lists
+echo "Updating Apt package lists..."
+if ! sudo apt-get update; then
+  log_error "Failed to update Apt package lists."
+  exit 1
+fi
+
+# Install Apt packages
+install_apt_packages
+
+echo "Apt package installation complete."
 
 # Install i3lock-color app
-cd ~/.config
-git clone https://github.com/Raymo111/i3lock-color.git
-cd ~/.config/i3lock-color/
-./install-i3lock-color.sh
+echo "Installing i3lock-color app..."
+source ./scripts/install_i3lock-color.sh
+echo "Done."
 
-# Clone awesome-wm volume-control widget
-cd ~/.config/awesome
-git clone https://github.com/deficient/volume-control.git
-
-# Clone awesome-wm battery-widget
-cd ~/.config/awesome
-git clone https://github.com/deficient/battery-widget.git
-
-# Clone ranger color themes
-cd ~/.config/ranger
-git clone https://github.com/ranger/colorschemes.git
+# Clone awesome-wm widgets
+echo "Cloning awesome-wm widgets..."
+source ./scripts/install_awesome-widgets.sh
+echo "Done."
 
 # Install flathub repo
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+echo "Installing flathub repo and listed flatpaks..."
+source ./install_flatpaks.sh
+echo "Done."
 
-# Install torbrowser-launcher flatpak
-flatpak install flathub com.github.micahflee.torbrowser-launcher
+# Install latest Vale release from GitHub
+echo "Installing latest Vale release from GitHub..."
+source ./scripts/install_vale.sh
+echo "Done."
 
 # Install vim-plug
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+echo "Installing vim-plug..."
+source ./scripts/install_vim-plug.sh
+echo "Done."
 
-# Run :PlugInstall
-vim -E -c PlugInstall -c q
+# Clone ranger color themes
+echo "Cloning ranger color themes..."
+source ./scripts/install_ranger.sh
+echo "Done."
 
 # Set DPI value (for 1080p screen)
+echo "Setting DPI value for 1080p screen..."
 echo "Xft.dpi: 144" > ~/.Xsession
 echo "xrdb -merge ~/.Xresources" > ~/.xinitrc
+echo "Done."
+
+echo ******************************
+echo ** Install script complete! **
+echo ******************************
+echo
+echo "You may need to logout or refresh awesome-wm (MOD+CTRL+r) to all changes"
 
