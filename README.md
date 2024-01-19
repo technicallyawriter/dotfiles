@@ -1,4 +1,4 @@
-# README.md
+# README
 
 Perform the following to setup a fresh environment. Run as the user you want to setup (user must have sudo privileges).
 
