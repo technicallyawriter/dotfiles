@@ -14,7 +14,7 @@ git clone https://github.com/technicallyawriter/dotfiles.git
 
 ```
 cd ~/git/dotfiles
-bash ./install.sh
+./install.sh
 ```
 
 restart awesome-wm, if needed, with **CTRL+MOD4+r**
