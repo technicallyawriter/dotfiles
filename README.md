@@ -1,6 +1,6 @@
 # README.md
 
-Perform the following to setup a fresh environment. Run as the user you want to setup (and user has sudo privileges).
+Perform the following to setup a fresh environment. Run as the user you want to setup (and user must have sudo privilege).
 
 ## Import keys
 
