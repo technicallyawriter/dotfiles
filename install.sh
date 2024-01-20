@@ -98,7 +98,7 @@ echo "Done."
 
 # Install flathub repo
 echo "Installing flathub repo and listed flatpaks..."
-./install_flatpaks.sh || log_warning "Flathub installed but the repo isn't available until reboot. You may need to run 'scripts/install_flatpaks.sh' again after reboot to complete your flatpak installs."
+./scripts/install_flatpaks.sh || log_warning "Flathub installed but the repo isn't available until reboot. You may need to run 'scripts/install_flatpaks.sh' again after reboot to complete your flatpak installs."
 
 # Install latest Vale release from GitHub
 echo "Installing latest Vale release from GitHub..."
