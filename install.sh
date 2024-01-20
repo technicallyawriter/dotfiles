@@ -14,7 +14,7 @@ dotfiles=(
     "alacritty/alacritty.yml"
     "awesome/rc.lua"
     "awesome/theme.lua"
-    "bash/.bashrc"
+    #"bash/.bashrc" # symlinked to ~ in special step
     "bash/.bash_aliases"
     "micro/settings.json"
     "micro/bindings.json"
@@ -34,6 +34,9 @@ for dotfile in "${dotfiles[@]}"; do
     ln -sf "$source_path" "$target_path"
     echo "Created symbolic link: $target_path/$(basename "$dotfile")"
 done
+
+# Special symlink for ~/.bashrc
+ln -sf $dotfiles_dir/bash/.bashrc ~/.bashrc
 
 echo "Symbolic links created successfully."
 
