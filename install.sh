@@ -1,40 +1,40 @@
 #!/bin/bash
 
-# Prompt for password to execute sudo later
-echo -n "Enter your password: "
-read -s password
-echo $password | sudo -S echo "This command requires sudo"
-
-# Set dotfile and config dir locations
-dotfiles_dir="$HOME/git/dotfiles"
-config_dir="$HOME/.config"
-
 # Function to log errors
 log_error() {
   echo "Error: $1" >&2
 }
 
-# Check if dotfiles directory exists
-if [ ! -d "$dotfiles_dir" ]; then
-  log_error "Dotfiles directory '$dotfiles_dir' not found."
-  exit 1
-fi
+# Set dotfile and config dir locations
+dotfiles_dir="$HOME/git/dotfiles/.config"
+config_dir="$HOME/.config"
 
-# Copy dotfiles contents to .config/
-echo "Copying dotfile directories to ~/.config/..."
-if ! cp -r "$dotfiles_dir"/* "$config_dir"; then
-  log_error "Failed to copy dotfiles to '$config_dir'."
-  exit 1
-fi
-echo "Dotfile directories copied successfully."
+# List of dotfiles
+dotfiles=(
+    "alacritty/alacritty.yml"
+    "awesome/rc.lua"
+    "awesome/theme.lua"
+    "bash/.bashrc"
+    "bash/.bash_aliases"
+    "micro/settings.json"
+    "micro/bindings.json"
+    "newsboat/config"
+    "newsboat/urls"
+    "ranger/rifle.conf"
+    "ranger/rc.conf"
+    "nvim/init.vim"
+    "tmux/tmux.conf"
+)
 
-# Create symlinks between Git and .config files
-echo "Creating symbolic links for individual files in the dotfile directories..."
-find "$dotfiles_dir" -type f -exec sh -c '
-  target_path="$config_dir/$(dirname "{}")"
-  mkdir -p "$target_path"
-  ln -sf "$dotfiles_dir/{}" "$target_path/$(basename "{}")"
-' \;
+# Iterate through dotfiles and create symbolic links
+for dotfile in "${dotfiles[@]}"; do
+    source_path="$dotfiles_dir/$dotfile"
+    target_path="$config_dir/$(dirname "$dotfile")"
+    mkdir -p "$target_path"
+    ln -sf "$source_path" "$target_path"
+    echo "Created symbolic link: $target_path/$(basename "$dotfile")"
+done
+
 echo "Symbolic links created successfully."
 
 # Apt package array
