@@ -8,13 +8,11 @@ log_error() {
 
 # Function to log warnings
 log_warning() {
-  echo
-  echo /*/*/*/*/*/*/*/*/*/
-  echo
+  echo "/*/*/*/*/*/*/*/*/*/"
+  echo ""
   echo "Warning: $1" >&2
-  echo
-  echo /*/*/*/*/*/*/*/*/*/
-  echo
+  echo ""
+  echo "/*/*/*/*/*/*/*/*/*/"
 }
 
 # Set dotfile and config dir locations
@@ -117,7 +115,7 @@ echo "Done."
 
 # Set DPI value (for 1080p screen)
 echo "Setting DPI value for 1080p screen..."
-echo "Xft.dpi: 144" > "$HOME/.Xsession" || log_error "Failed to set DPI value."
+echo "Xft.dpi: 144" > "$HOME/.Xresources" || log_error "Failed to set DPI value."
 echo "xrdb -merge $HOME/.Xresources" > "$HOME/.xinitrc" || log_error "Failed to set DPI value."
 echo "Done."
 
@@ -127,8 +125,9 @@ echo "NOTE: CapsLock is now 'Shift + CapsLock'"
 sudo sed -i 's/^XKBOPTIONS=.*/XKBOPTIONS="caps:escape_shifted_capslock"/' /etc/default/keyboard
 echo "XKBOPTIONS updated successfully."
 
-echo ******************************
+echo "******************************"
 echo "** Install script complete! **"
-echo ******************************
-echo
-echo "You may need to logout or refresh awesome-wm (MOD+CTRL+r) to apply all changes"
+echo "******************************"
+echo ""
+echo "You may need refresh awesome-wm (MOD+CTRL+r), source ~/.bashrc, or logout/reboot to apply all changes"
+echo ""

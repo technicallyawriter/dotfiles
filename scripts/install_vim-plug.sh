@@ -10,7 +10,7 @@ fi
 
 # Run :PlugInstall
 echo "Running :PlugInstall..."
-if nvim -E -s -u "$HOME/.config/nvim/init.vim" +PlugInstall +qa; then
+if nvim --headless +PlugInstall +qa; then
   echo ":PlugInstall executed successfully."
 else
   log_error "Failed to run :PlugInstall successfully. Check your vim plugins and try again."
