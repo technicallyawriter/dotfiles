@@ -9,6 +9,9 @@ else
   echo "Failed to install vim-plug via script."
 fi
 
+# Change directory ownership to current user
+sudo chown -R $USER:$USER $HOME/.local 
+
 # Run :PlugInstall
 echo "Running :PlugInstall..."
 if nvim --headless +PlugInstall +qa; then
