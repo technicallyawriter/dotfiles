@@ -111,6 +111,12 @@ echo "Xft.dpi: 144" > "$HOME/.Xsession" || log_error "Failed to set DPI value."
 echo "xrdb -merge $HOME/.Xresources" > "$HOME/.xinitrc" || log_error "Failed to set DPI value."
 echo "Done."
 
+# Set CapsLock as Esc key for Vim
+echo "Setting XKBOPTIONS to use CapsLock as Esc key for Vim..."
+echo "NOTE: CapsLock is now 'Shift + CapsLock'"
+sudo sed -i 's/^XKBOPTIONS=.*/XKBOPTIONS="caps:escape_shifted_capslock"/' /etc/default/keyboard
+echo "XKBOPTIONS updated successfully."
+
 echo ******************************
 echo "** Install script complete! **"
 echo ******************************
