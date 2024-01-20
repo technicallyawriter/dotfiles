@@ -2,17 +2,20 @@
 
 # Function to log errors
 log_error() {
+  echo ""
   echo "Error: $1" >&2
   exit 1
 }
 
 # Function to log warnings
 log_warning() {
+  echo ""
   echo "/*/*/*/*/*/*/*/*/*/"
   echo ""
   echo "Warning: $1" >&2
   echo ""
   echo "/*/*/*/*/*/*/*/*/*/"
+  echo ""
 }
 
 # Set dotfile and config dir locations
@@ -125,9 +128,14 @@ echo "NOTE: CapsLock is now 'Shift + CapsLock'"
 sudo sed -i 's/^XKBOPTIONS=.*/XKBOPTIONS="caps:escape_shifted_capslock"/' /etc/default/keyboard
 echo "XKBOPTIONS updated successfully."
 
+echo ""
+echo "******************************"
 echo "******************************"
 echo "** Install script complete! **"
 echo "******************************"
+echo "******************************"
+echo ""
 echo ""
 echo "You may need refresh awesome-wm (MOD+CTRL+r), source ~/.bashrc, or logout/reboot to apply all changes"
+echo ""
 echo ""
