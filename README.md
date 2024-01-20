@@ -11,6 +11,8 @@ git clone https://github.com/technicallyawriter/dotfiles.git && cd dotfiles/
 
 ## Run install.sh
 
+FIXME: Permissions issue around vim-plug install...
+
 ```
 sudo -E ./install.sh
 ```
