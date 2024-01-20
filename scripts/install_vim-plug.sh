@@ -7,7 +7,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 # Change directory owner from root to $USER
 echo "Changing directory owner from root to current user"
-if sudo chown -R $USER:$USER $HOME/.local/share/nvim; then
+if sudo chown -R $USER:$USER "${XDG_DATA_HOME:-$HOME}/.local/share/nvim"; then
   echo "Success!"
 else
   log_error "Failed to change directory owner"
@@ -20,4 +20,3 @@ if nvim --headless +PlugInstall +qa; then
 else
   log_error "Failed to run :PlugInstall successfully. Check your vim plugins and try again."
 fi
-
