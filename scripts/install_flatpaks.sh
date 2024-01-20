@@ -13,7 +13,6 @@ echo "Installing flatpaks..."
 if flatpak install flathub com.github.micahflee.torbrowser-launcher; then
   echo "torbrowser-launcher flatpak installed."
 else
-  log_error "Failed to add torbrowser-launcher flatpak"
+  log_warning "Failed to add torbrowser-launcher flatpak. If you haven't rebooted since installing the Flathub repo, do so and try again."
 fi
 
-echo "Flatpaks installed."

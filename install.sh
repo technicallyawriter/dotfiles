@@ -6,6 +6,17 @@ log_error() {
   exit 1
 }
 
+# Function to log warnings
+log_warning() {
+  echo
+  echo /*/*/*/*/*/*/*/*/*/
+  echo
+  echo "Warning: $1" >&2
+  echo
+  echo /*/*/*/*/*/*/*/*/*/
+  echo
+}
+
 # Set dotfile and config dir locations
 dotfiles_dir="$HOME/git/dotfiles/.config"
 config_dir="$HOME/.config"
@@ -87,8 +98,7 @@ echo "Done."
 
 # Install flathub repo
 echo "Installing flathub repo and listed flatpaks..."
-./install_flatpaks.sh || log_error "Failed to install flathub repo and flatpaks."
-echo "Done."
+./install_flatpaks.sh || log_warning "Flathub installed but the repo isn't available until reboot. You may need to run 'scripts/install_flatpaks.sh' again after reboot to complete your flatpak installs."
 
 # Install latest Vale release from GitHub
 echo "Installing latest Vale release from GitHub..."
