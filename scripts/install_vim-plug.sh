@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Get current user and assign it to a variable
+current_user=$(whoami)
+
+# Echo the current user
+echo "Current User: $current_user"
+
 # install vim-plug via script
 echo "Installing vim-plug via script"
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -7,11 +13,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 # Change directory owner from root to $USER
 echo "Changing directory owner from root to current user"
-if sudo chown -R $USER:$USER "${XDG_DATA_HOME:-$HOME}/.local/share/nvim"; then
-  echo "Success!"
-else
-  log_error "Failed to change directory owner"
-fi
+sudo chown -R $current_user:$current_user "${XDG_DATA_HOME:-$HOME}/.local/share/nvim"
 
 # Run :PlugInstall
 echo "Running :PlugInstall..."
