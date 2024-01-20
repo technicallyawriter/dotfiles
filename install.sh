@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Prompt for password to execute sudo later
+echo -n "Enter your password: "
+read -s password
+echo $password | sudo -S echo "This command requires sudo"
+
 # Set dotfile and config dir locations
 dotfiles_dir="$HOME/git/dotfiles"
 config_dir="$HOME/.config"
@@ -15,8 +20,8 @@ if [ ! -d "$dotfiles_dir" ]; then
   exit 1
 fi
 
+# Copy dotfiles contents to .config/
 echo "Copying dotfile directories to ~/.config/..."
-# This is intentionally not recursive since we'll clone some stuff later
 if ! cp -r "$dotfiles_dir"/* "$config_dir"; then
   log_error "Failed to copy dotfiles to '$config_dir'."
   exit 1
