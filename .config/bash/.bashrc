@@ -48,17 +48,34 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+#################
+##### CUSTOM PS1
+
+# Set colors
+USER_COLOR='\[\033[0;35m\]'
+HOST_COLOR='\[\033[0;35m\]'
+PATH_COLOR='\[\033[0;35m\]'
+SYMBOL_COLOR='\[\033[0;35m\]'
+GIT_BRANCH_COLOR='\[\033[0;31m\]'
+RESET_COLOR='\[\033[0m\]'  # Reset color
+
+# Function to get current git branch
+get_git_branch() {
+    branch=$(git branch 2>/dev/null | grep \* | awk '{print $2}')
+    if [ ! -z "$branch" ]; then
+        echo "($branch)"
+    fi
+}
+
+# Check if color_prompt is set to yes
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-   # monochromatic
-   #PS1="\[\e[38;5;243m\]\u\[\e[38;5;245m\]@\[\e[38;5;249m\]\h \[\e[38;5;254m\]\w \[\033[0m\]"
-   # violet pink
-   PS1="\[\e[38;5;165m\]\u\[\e[38;5;171m\]@\[\e[38;5;213m\]\h \[\e[38;5;219m\]\w \[\033[0m\]"
-   # default
-   #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\'
+    # PS1 prompt with colors
+    PS1="${USER_COLOR}\u${RESET_COLOR}${SYMBOL_COLOR}@${RESET_COLOR}${HOST_COLOR}\h${RESET_COLOR} ${PATH_COLOR}\w${RESET_COLOR}${GIT_BRANCH_COLOR}\$(get_git_branch)${RESET_COLOR} "
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    # Default PS1 prompt without colors
+    PS1="\u@\h:\w\$ "
 fi
+
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
