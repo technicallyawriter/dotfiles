@@ -5,7 +5,7 @@ window:
     x: 8
     y: 8
   dynamic_padding: false
-  opacity: 0.88
+  opacity: 0.93 
   startup_mode: Windowed
   title: Alacritty
   class:
