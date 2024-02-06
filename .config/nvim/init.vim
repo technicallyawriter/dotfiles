@@ -69,5 +69,3 @@ let g:ale_vale_executable = '/usr/local/bin/vale'
 
 " Automatically fix issues on save
 let g:ale_fix_on_save = 1
-
-
