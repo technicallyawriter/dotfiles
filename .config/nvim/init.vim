@@ -7,6 +7,7 @@ set tabstop=2 softtabstop=2
 set wrap
 set linebreak
 set mouse=a
+set clipboard=unnamedplus
 
 " remap splits navigation
 nnoremap <C-h> <C-w>h
