@@ -5,6 +5,7 @@ set hlsearch
 set expandtab
 set tabstop=2 softtabstop=2
 set wrap
+set linebreak
 set mouse=a
 
 " remap splits navigation
