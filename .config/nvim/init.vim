@@ -52,11 +52,12 @@ Plug 'https://github.com/mattn/vim-lsp-settings'
 Plug 'https://github.com/dense-analysis/ale'
 call plug#end()
 
-" ALE/Vale Config 
+""""""""""""""""""""
+"" ALE Config
 " Enable ALE
 let g:ale_enabled = 1
 
-" Use Vale for linting
+" Vale linting
 let g:ale_linters = {
   \ 'text': ['vale'],
   \ }
@@ -66,6 +67,25 @@ let g:ale_javascript_eslint_executable = 'eslint'
 
 " Specify the Vale executable
 let g:ale_vale_executable = '/usr/local/bin/vale'
+
+" Prettier formatting
+let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'javascript': ['prettier'],
+    \   'javascript.jsx': ['prettier'],
+    \   'typescript': ['prettier'],
+    \   'typescript.tsx': ['prettier'],
+    \   'css': ['prettier'],
+    \   'html': ['prettier'],
+    \   'yaml': ['prettier'],
+    \   'toml': ['prettier'],
+    \   'php': ['prettier'],
+    \   'go': ['prettier'],
+    \   'python': ['prettier'],
+    \   'markdown': ['prettier'],
+    \   'asciidoc': ['prettier'],
+    \   'bash': ['prettier'],
+    \}
 
 " Automatically fix issues on save
 let g:ale_fix_on_save = 1
