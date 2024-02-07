@@ -1,18 +1,11 @@
-set number
-set ruler
 set autoindent
 set showmatch
 set ignorecase
-set hlsearch  
-set expandtab  
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set wildmode=longest,list
-set clipboard=unnamedplus
+set hlsearch
+set expandtab
+set tabstop=2 softtabstop=2
 set wrap
 set mouse=a
-set splitbelow splitright
 
 " remap splits navigation
 nnoremap <C-h> <C-w>h
