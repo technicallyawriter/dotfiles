@@ -2,10 +2,10 @@ env:
   TERM: alacritty
 window:
   padding:
-    x: 8
-    y: 8
+    x: 12
+    y: 12
   dynamic_padding: false
-  opacity: 1.0 
+  opacity: 1.0
   startup_mode: Windowed
   title: Alacritty
   class:
@@ -22,29 +22,29 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '#000000'
-    foreground: '#ffffff'
+    background: "#000000"
+    foreground: "#ffffff"
   # Normal colors
   normal:
-    black: '#000000'
-    red: '#cd0000'
-    green: '#00cd00'
-    yellow: '#cdcd00'
-    blue: '#0000ee'
-    magenta: '#cd00cd'
-    cyan: '#00cdcd'
-    white: '#e5e5e5'
+    black: "#000000"
+    red: "#cd0000"
+    green: "#00cd00"
+    yellow: "#cdcd00"
+    blue: "#0000ee"
+    magenta: "#cd00cd"
+    cyan: "#00cdcd"
+    white: "#e5e5e5"
 
   # Bright colors
   bright:
-    black: '#7f7f7f'
-    red: '#ff0000'
-    green: '#00ff00'
-    yellow: '#ffff00'
-    blue: '#5c5cff'
-    magenta: '#ff00ff'
-    cyan: '#00ffff'
-    white: '#ffffff'
+    black: "#7f7f7f"
+    red: "#ff0000"
+    green: "#00ff00"
+    yellow: "#ffff00"
+    blue: "#5c5cff"
+    magenta: "#ff00ff"
+    cyan: "#00ffff"
+    white: "#ffffff"
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
@@ -59,27 +59,7 @@ key_bindings:
   - { key: Copy, mods: None, action: Copy }
   - { key: L, mods: Control, action: ClearLogNotice }
   - { key: L, mods: Control, chars: "\f" }
-  - {
-      key: PageUp,
-      mods: None,
-      action: ScrollPageUp,
-      mode: ~Alt
-    }
-  - {
-      key: PageDown,
-      mods: None,
-      action: ScrollPageDown,
-      mode: ~Alt
-    }
-  - {
-      key: Home,
-      mods: Shift,
-      action: ScrollToTop,
-      mode: ~Alt
-    }
-  - {
-      key: End,
-      mods: Shift,
-      action: ScrollToBottom,
-      mode: ~Alt
-    }
+  - { key: PageUp, mods: None, action: ScrollPageUp, mode: ~Alt }
+  - { key: PageDown, mods: None, action: ScrollPageDown, mode: ~Alt }
+  - { key: Home, mods: Shift, action: ScrollToTop, mode: ~Alt }
+  - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }
