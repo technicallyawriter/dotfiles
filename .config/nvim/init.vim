@@ -21,13 +21,6 @@ noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 
-" nerdtree toggle
-nnoremap <C-t> :NERDTreeToggle<CR>
-
-" Emmet shortcuts
-let g:user_emmet_mode='n' "only enable normal mode functions
-let g:user_emmet_leader_key=","
-
 " LSP config
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -40,8 +33,6 @@ augroup END
 
 " PLUGINS via vim-plug
 call plug#begin()
-Plug 'https://github.com/preservim/nerdtree'
-Plug 'https://github.com/mattn/emmet-vim'
 Plug 'https://github.com/prabirshrestha/vim-lsp'
 Plug 'https://github.com/mattn/vim-lsp-settings'
 Plug 'https://github.com/dense-analysis/ale'
