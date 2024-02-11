@@ -1,13 +1,31 @@
-set autoindent
-set showmatch
-set ignorecase
-set hlsearch
-set expandtab
-set tabstop=2 softtabstop=2
+colorscheme desert
+filetype plugin on
+set nocompatible
+syntax on
 set wrap
-set linebreak
+set spell
+set number
+set ignorecase
+set cursorline
+set wildmenu
+
+" indent
+set autoindent
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" status line
+set laststatus=2
+set statusline=%<%F\ %(%m%r%w%)%=%p%%
+
+" shame
 set mouse=a
 set clipboard=unnamedplus
+
+" file browsing
+let g:netrw_banner=0
 
 " remap splits navigation
 nnoremap <C-h> <C-w>h
@@ -31,15 +49,7 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-" PLUGINS via vim-plug
-call plug#begin()
-Plug 'https://github.com/prabirshrestha/vim-lsp'
-Plug 'https://github.com/mattn/vim-lsp-settings'
-Plug 'https://github.com/dense-analysis/ale'
-call plug#end()
-
-""""""""""""""""""""
-"" ALE Config
+""" ALE Config
 " Enable ALE
 let g:ale_enabled = 1
 
@@ -47,9 +57,6 @@ let g:ale_enabled = 1
 let g:ale_linters = {
   \ 'text': ['vale'],
   \ }
-
-" Use global eslint if available
-let g:ale_javascript_eslint_executable = 'eslint'
 
 " Specify the Vale executable
 let g:ale_vale_executable = '/usr/local/bin/vale'
@@ -75,3 +82,26 @@ let g:ale_fixers = {
 
 " Automatically fix issues on save
 let g:ale_fix_on_save = 1
+
+" FZF
+set rtp+=~/.fzf
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+" Key mappings
+" fzf all files
+nnoremap <leader>f :FZF<CR>
+" fzf Git files
+nnoremap <leader>g :GFiles<CR>
+" fzf buffers
+nnoremap <leader>b :Buffers<CR>
+" fzf with ripgrep
+nnoremap <leader>t :Rg<CR>
+
+""" PLUGINS
+call plug#begin()
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+call plug#end()

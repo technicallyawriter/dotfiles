@@ -2,8 +2,8 @@ env:
   TERM: alacritty
 window:
   padding:
-    x: 12
-    y: 12
+    x: 8
+    y: 8
   dynamic_padding: false
   opacity: 1.0
   startup_mode: Windowed
@@ -14,18 +14,24 @@ window:
 scrolling:
   history: 5000
 font:
-  size: 13.0
+  normal:
+    family: ubuntumono
+    style: "Regular"
+  bold:
+    style: "Bold"
+  italic:
+    style: "Italic"
+  bold_italic:
+    style: "Bold Italic"
+  size: 15.0
   offset:
     x: 0
     y: 1
 draw_bold_text_with_bright_colors: true
-mouse:
-  hints:
-    style: Underline
 colors:
   # Default colors
   primary:
-    background: "#000000"
+    background: "#222222"
     foreground: "#ffffff"
   # Normal colors
   normal:
