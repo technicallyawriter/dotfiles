@@ -1,13 +1,22 @@
+let mapleader = ","
+
 colorscheme desert
-filetype plugin on
-set nocompatible
+
 syntax on
+
+filetype plugin on
+
 set wrap
 set spell
 set number
 set ignorecase
 set cursorline
+
+" find
+set path+=**
+set wildmode=list:longest,full
 set wildmenu
+set wildignore+=**/node_modules/**,**/public/**,**build/site/**,*.png,*.jpeg,*.zip
 
 " indent
 set autoindent
@@ -49,8 +58,7 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-""" ALE Config
-" Enable ALE
+" ALE Config
 let g:ale_enabled = 1
 
 " Vale linting
@@ -58,7 +66,7 @@ let g:ale_linters = {
   \ 'text': ['vale'],
   \ }
 
-" Specify the Vale executable
+" Path to Vale
 let g:ale_vale_executable = '/usr/local/bin/vale'
 
 " Prettier formatting
@@ -83,25 +91,9 @@ let g:ale_fixers = {
 " Automatically fix issues on save
 let g:ale_fix_on_save = 1
 
-" FZF
-set rtp+=~/.fzf
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
-" Key mappings
-" fzf all files
-nnoremap <leader>f :FZF<CR>
-" fzf Git files
-nnoremap <leader>g :GFiles<CR>
-" fzf buffers
-nnoremap <leader>b :Buffers<CR>
-" fzf with ripgrep
-nnoremap <leader>t :Rg<CR>
-
-""" PLUGINS
+" PLUGINS
 call plug#begin()
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'dense-analysis/ale'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 call plug#end()
