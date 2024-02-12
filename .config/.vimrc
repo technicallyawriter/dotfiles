@@ -16,7 +16,7 @@ set cursorline
 set path+=**
 set wildmode=list:longest,full
 set wildmenu
-set wildignore+=**/node_modules/**,**/public/**,**build/site/**,*.png,*.jpeg,*.zip
+set wildignore+=**/node_modules/**,**/public/**,**build/site/**,**/*.png,**/*.jpeg,**/*.jpg,**/*.svg
 
 " indent
 set autoindent
@@ -47,6 +47,19 @@ noremap <silent> <C-Left> :vertical resize +3<CR>
 noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
+
+" easier scrolling
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" automatically close brackets and parenthesis and place cursor inside
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>0
+inoremap {;<CR> {<CR>};<ESC>0
 
 " LSP config
 function! s:on_lsp_buffer_enabled() abort
