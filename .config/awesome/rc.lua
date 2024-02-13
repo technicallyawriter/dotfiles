@@ -52,13 +52,13 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 
--- CUSTOM THEME	
--- copied /usr/share/awesome/themes/zenburn and updated the following: 
+-- CUSTOM THEME
+-- copied /usr/share/awesome/themes/zenburn and updated the following:
 -- theme.useless_gap   = dpi(1)
 -- theme.border_focus  = "#FF8000"
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "xfce4-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -354,7 +354,7 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
 	-- Firefox
 	awful.key({ modkey }, "b", function () awful.util.spawn("firefox") end),
-	-- Thunderbird 
+	-- Thunderbird
 	awful.key({ modkey }, "t", function () awful.util.spawn("thunderbird") end),
 	-- Element
 	awful.key({ modkey }, "e", function () awful.util.spawn("element-desktop") end),
@@ -364,7 +364,7 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "x", function () awful.util.spawn("/usr/bin/i3lock -k --inside-color=555555 ring-color=444444 -B sigma --indicator --date-str='%A, %D'") end),
         -- GIMP
 	awful.key({ modkey }, "g", function () awful.util.spawn("gimp") end),
-        -- LibreOffice 
+        -- LibreOffice
 	awful.key({ modkey }, "w", function () awful.util.spawn("libreoffice") end)
 )
 

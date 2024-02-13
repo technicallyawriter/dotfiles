@@ -27,7 +27,7 @@ set shiftwidth=4
 
 " status line
 set laststatus=2
-set statusline=%<%F\ %(%m%r%w%)%=%p%%
+set statusline=%<%f\ %(%m%r%w%)%=%p%%
 
 " shame
 set mouse=a
@@ -51,15 +51,6 @@ noremap <silent> <C-Down> :resize -3<CR>
 " easier scrolling
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
-
-" automatically close brackets and parenthesis and place cursor inside
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>0
-inoremap {;<CR> {<CR>};<ESC>0
 
 " LSP config
 function! s:on_lsp_buffer_enabled() abort
@@ -85,20 +76,12 @@ let g:ale_vale_executable = '/usr/local/bin/vale'
 " Prettier formatting
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'javascript': ['prettier'],
+    \   'javascript.js': ['prettier'],
     \   'javascript.jsx': ['prettier'],
-    \   'typescript': ['prettier'],
-    \   'typescript.tsx': ['prettier'],
     \   'css': ['prettier'],
     \   'html': ['prettier'],
     \   'yaml': ['prettier'],
-    \   'toml': ['prettier'],
-    \   'php': ['prettier'],
-    \   'go': ['prettier'],
-    \   'python': ['prettier'],
     \   'markdown': ['prettier'],
-    \   'asciidoc': ['prettier'],
-    \   'bash': ['prettier'],
     \}
 
 " Automatically fix issues on save
