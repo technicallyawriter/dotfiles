@@ -7,6 +7,7 @@ syntax on
 filetype plugin on
 
 set wrap
+set linebreak
 set spell
 set number
 set ignorecase
