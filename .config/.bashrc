@@ -48,6 +48,9 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# set ls color for directories
+export LS_COLORS="$LS_COLORS:di=1;35"
+
 #################
 ##### CUSTOM PS1
 
@@ -113,3 +116,40 @@ export NVM_DIR="$HOME/.nvm"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 . "$HOME/.cargo/env"
+
+############
+## ALIASES
+
+# apt and flatpak upgrade
+alias upgrade="sudo apt update && sudo apt upgrade && flatpak upgrade"
+
+# shutdown
+alias shutdown="sudo shutdown now"
+
+# reboot
+alias reboot="sudo reboot now"
+
+# ls color
+alias ls="ls --color"
+
+# ls long list all
+alias ll="ls -l"
+
+# open newsboat
+alias rss="newsboat"
+
+# youtube-dl
+alias youtube-dl="yt-dlp"
+
+# open ranger
+alias files="ranger"
+
+# backlight percentages
+alias blhigh="xbacklight -set 100"
+alias bllow="xbacklight -set 5"
+
+# antora build
+alias build="npx antora --fetch playbook.yml"
+
+# antora preview with no caching
+alias preview="npx http-preview build/site -c-1"
