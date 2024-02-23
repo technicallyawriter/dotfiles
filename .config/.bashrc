@@ -65,7 +65,7 @@ RESET_COLOR='\[\033[0m\]'  # Reset color
 # Function to get current git branch
 get_git_branch() {
     branch=$(git branch 2>/dev/null | grep \* | awk '{print $2}')
-    if [ ! -z "$branch" ]; then
+    if [ -n "$branch" ]; then
         echo "($branch)"
     fi
 }
@@ -89,11 +89,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-# Alias definitions
-if [ -f ~/.config/bash/.bash_aliases ]; then
-    . ~/.config/bash/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -153,3 +148,6 @@ alias build="npx antora --fetch playbook.yml"
 
 # antora preview with no caching
 alias preview="npx http-preview build/site -c-1"
+
+# todo list
+alias todo="vim ~/todo.md"

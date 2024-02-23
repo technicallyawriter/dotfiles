@@ -1,9 +1,7 @@
-let mapleader = ","
+let mapleader = " "
 
 colorscheme desert
-
 syntax on
-
 filetype plugin on
 
 set wrap
@@ -12,6 +10,7 @@ set spell
 set number
 set ignorecase
 set cursorline
+set showcmd
 
 " find
 set path+=**
@@ -28,11 +27,18 @@ set shiftwidth=4
 
 " status line
 set laststatus=2
-set statusline=%<%f\ %(%m%r%w%)%=%p%%
+set statusline=%<%F\   " File path
+set statusline+=%m     " Modified flag
+set statusline+=%r     " Readonly flag
+set statusline+=%y     " Filetype indicator
+set statusline+=%=     " set to right
+set statusline+=%p%%   " Percent through the file
+
+" system clipboard
+noremap <Leader>y "+y
 
 " shame
 set mouse=a
-set clipboard=unnamedplus
 
 " file browsing
 let g:netrw_banner=0
@@ -77,12 +83,17 @@ let g:ale_vale_executable = '/usr/local/bin/vale'
 " Prettier formatting
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'javascript.js': ['prettier'],
-    \   'javascript.jsx': ['prettier'],
+    \   'javascript': ['prettier'],
     \   'css': ['prettier'],
     \   'html': ['prettier'],
     \   'yaml': ['prettier'],
+    \   'toml': ['prettier'],
+    \   'php': ['prettier'],
+    \   'go': ['prettier'],
+    \   'python': ['prettier'],
     \   'markdown': ['prettier'],
+    \   'asciidoc': ['prettier'],
+    \   'bash': ['prettier'],
     \}
 
 " Automatically fix issues on save
@@ -93,4 +104,5 @@ call plug#begin()
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'dense-analysis/ale'
+Plug 'itspriddle/vim-shellcheck'
 call plug#end()
