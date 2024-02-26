@@ -59,6 +59,10 @@ noremap <silent> <C-Down> :resize -3<CR>
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
+" remap for moving within a wrapped line
+noremap j gj
+noremap k gk
+
 " LSP config
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
