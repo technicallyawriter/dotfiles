@@ -8,6 +8,7 @@ set wrap
 set linebreak
 set spell
 set number
+set relativenumber
 set ignorecase
 set cursorline
 set showcmd
@@ -27,7 +28,7 @@ set shiftwidth=4
 
 " status line
 set laststatus=2
-set statusline=%<%F\   " File path
+set statusline=%<%f\   " File path
 set statusline+=%m     " Modified flag
 set statusline+=%r     " Readonly flag
 set statusline+=%y     " Filetype indicator

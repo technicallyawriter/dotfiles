@@ -144,6 +144,9 @@ alias files="ranger"
 alias blhigh="xbacklight -set 100"
 alias bllow="xbacklight -set 5"
 
+# copy tmux buffer to system clipboard
+alias clippy="tmux show-buffer | xclip -selection c"
+
 # antora build
 alias build="npx antora --fetch playbook.yml"
 
