@@ -353,7 +353,7 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
 	-- Firefox
-	awful.key({ modkey }, "b", function () awful.util.spawn("firefox") end),
+	awful.key({ modkey }, "b", function () awful.util.spawn("flatpak run org.mozilla.firefox") end),
 	-- Thunderbird
 	awful.key({ modkey }, "t", function () awful.util.spawn("thunderbird") end),
 	-- Element
